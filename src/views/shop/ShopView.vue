@@ -50,6 +50,15 @@
                 </button>
               </label>
 
+              <!-- <router-link
+                v-if="isAdmin"
+                to="/approve_users"
+                class="shop-vault__admin-add"
+              >
+                <v-icon size="18" color="#ffffff">mdi-account-check-outline</v-icon>
+                Approve Users
+              </router-link> -->
+
               <router-link
                 v-if="isAdmin"
                 to="/add_product"
@@ -61,6 +70,20 @@
             </div>
           </div>
         </div>
+
+        <!-- <AlertBanner
+          v-if="isAdmin && pendingCount > 0"
+          type="warning"
+          :title="`มีสมาชิกใหม่รออนุมัติ ${pendingCount} บัญชี`"
+          message="ตรวจสอบรายชื่อผู้สมัครสมาชิกใหม่และกดอนุมัติเพื่อเปิดสิทธิ์เข้าดูรายละเอียดและสั่งซื้อสินค้า"
+          class="shop-vault__banner"
+        >
+          <template #actions>
+            <router-link to="/approve_users" class="ca-btn ca-btn--banner">
+              ไปหน้าอนุมัติสมาชิก
+            </router-link>
+          </template>
+        </AlertBanner> -->
 
         <p v-if="loading" class="shop-vault__msg">กำลังโหลดรายการการ์ด...</p>
         <AlertBanner
@@ -127,6 +150,7 @@ import router from '@/router'
 import { useProducts, FILTERS } from '@/hook/useProducts'
 import { useCart } from '@/hook/useCart'
 import { useAuth } from '@/hook/useAuth'
+// import { useUsers } from '@/hook/useUsers'
 import { useAlert } from '@/hook/useAlert'
 import { FOOTER_BUDDY_SPRITES } from '@/services/pokemonSprites'
 
@@ -146,6 +170,7 @@ export default {
     } = useProducts()
     const { count: cartCount, add: addToCart, remove: removeFromCart } = useCart()
     const { isAdmin } = useAuth()
+    // const { pendingCount } = useUsers()
     const { success, error: errorToast, confirm } = useAlert()
 
     const deletingId = ref('')
@@ -187,6 +212,7 @@ export default {
       FILTERS,
       cartCount,
       isAdmin,
+      // pendingCount,
       deletingId,
       addToCart,
       viewProduct,

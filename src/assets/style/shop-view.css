@@ -106,7 +106,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   flex: 0 1 auto;
 }
 .shop-page .shop-vault__admin-add {
@@ -278,7 +278,7 @@
   .shop-vault { padding: 40px 20px 80px; }
   .shop-vault__controls { flex-direction: column; align-items: stretch; }
   .shop-vault__tools { width: 100%; }
-  .shop-vault__search { flex: 1 1 0; width: auto; min-width: 0; }
+  .shop-vault__search { flex: 1 1 100%; width: auto; min-width: 0; }
   .shop-foot { padding: 30px 20px; justify-content: center; text-align: center; gap: 16px; }
   .shop-foot__sprite { height: 38px; max-width: 50px; }
 }

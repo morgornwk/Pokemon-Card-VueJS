@@ -1,51 +1,12 @@
-.tech-band {
-  background: transparent;
-  overflow: hidden;
-  padding: 14px 0;
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.tech-band__track {
-  display: flex;
-  align-items: center;
-  width: max-content;
-  animation: scroll 28s linear infinite;
-}
-
-.tech-band:hover .tech-band__track {
-  animation-play-state: paused;
-}
-
-.tech-card {
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 18px;
-  margin: 0 8px;
-  background: #f8fafc;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 999px;
-  white-space: nowrap;
-}
-
-.tech-name {
-  color: #334155;
-  font-size: 0.9rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-33.333%);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .tech-band__track {
-    animation: none;
-  }
-}
+.tech-band { padding:22px 0 24px; overflow:hidden; background:#f0f3ef; border-top:1px solid #e8ece8; border-bottom:1px solid #e8ece8; }
+.tech-band__intro { display:flex; align-items:center; gap:16px; width:min(1160px,calc(100% - 64px)); margin:0 auto 17px; color:#8b948d; font-size:9px; font-weight:700; letter-spacing:.2em; }
+.tech-band__intro i { width:44px; height:1px; background:#cbd4cd; }
+.tech-band__viewport { overflow:hidden; }
+.tech-band__track { display:flex; width:max-content; animation:tech-marquee 34s linear infinite; }
+.tech-band:hover .tech-band__track { animation-play-state:paused; }
+.tech-card { display:flex; align-items:center; gap:10px; min-width:174px; padding:4px 25px; color:#4d5951; font-size:13px; font-weight:600; }
+.tech-card__svg { display:block; flex-shrink:0; width:21px; height:21px; }
+.tech-card + .tech-card { border-left:1px solid #dce3dd; }
+@keyframes tech-marquee { from{transform:translateX(0)}to{transform:translateX(-50%)} }
+@media(prefers-reduced-motion:reduce){.tech-band__track{animation:none}}
+@media(max-width:600px){.tech-band__intro{width:calc(100% - 40px)}}

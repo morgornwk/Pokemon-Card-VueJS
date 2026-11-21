@@ -13,7 +13,7 @@ export default {
   education: {
     university: 'Khon Kaen University',
     campus: 'Nong Khai Campus',
-    major: 'Complete Science',
+    major: 'Computer Science',
     graduatedYear: 'Year 2569',
   },
 

@@ -14,6 +14,37 @@
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
+.shop-nav__brand-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.shop-nav__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #4b5563;
+  text-decoration: none;
+  font-family: var(--kv-font-display, 'Space Grotesk', sans-serif);
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 0.18s ease;
+}
+
+.shop-nav__back .v-icon {
+  color: inherit;
+}
+
+.shop-nav__back:hover {
+  background: #e5e7eb;
+  color: #111827;
+  transform: translateX(-2px);
+}
+
 .shop-nav__brand { display: flex; align-items: center; gap: 12px; text-decoration: none; min-height: 44px; border-radius: 10px; }
 
 .shop-nav__logo {
@@ -28,6 +59,54 @@
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.shop-nav .shop-nav__actions .shop-nav__admin {
+  position: relative;
+  height: 44px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #111827;
+  color: #ffffff;
+  font: 600 0.84rem var(--kv-font-display, 'Space Grotesk', sans-serif);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
+}
+
+.shop-nav .shop-nav__actions .shop-nav__admin:hover {
+  background: linear-gradient(to right, #f97316, #ea580c);
+  border-color: transparent;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.28);
+  transform: translateY(-1px);
+}
+
+.shop-nav .shop-nav__actions .shop-nav__admin .v-icon {
+  color: inherit;
+}
+
+.shop-nav__admin-badge {
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #f97316;
+  color: #ffffff;
+  font: 700 0.7rem / 1 'Space Grotesk', sans-serif;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop-nav .shop-nav__actions .shop-nav__admin:hover .shop-nav__admin-badge {
+  background: #ffffff;
+  color: #ea580c;
 }
 
 .shop-nav .shop-nav__actions .shop-nav__btn {
@@ -54,14 +133,15 @@
   transform: translateY(-1px);
 }
 .shop-nav .shop-nav__actions .shop-nav__btn--account {
-  background: linear-gradient(135deg, #111827);
+  background: #111827;
   border-color: transparent;
   color: #ffffff;
 }
 .shop-nav .shop-nav__actions .shop-nav__btn--account:hover {
-  background: linear-gradient(135deg, #111827);
+  background: linear-gradient(135deg, #f97316, #ea580c);
   border-color: transparent;
   color: #ffffff;
+  box-shadow: 0 4px 12px rgba(249, 115, 22, 0.28);
 }
 .shop-nav .shop-nav__actions .shop-nav__btn .v-icon,
 .shop-nav .shop-nav__user .shop-nav__logout .v-icon {
@@ -180,5 +260,22 @@
 
 @media (max-width: 700px) {
   .shop-nav { padding: 0 16px; gap: 10px; }
+  .shop-nav__brand-group { gap: 8px; }
+  .shop-nav__back { padding: 6px; }
+  .shop-nav__back-text { display: none; }
   .shop-nav__username { max-width: 76px; }
+  .shop-nav .shop-nav__actions .shop-nav__admin {
+    width: 44px;
+    padding: 0;
+    justify-content: center;
+  }
+  .shop-nav__admin-text {
+    display: none;
+  }
+  .shop-nav__admin-badge {
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    border: 2px solid #ffffff;
+  }
 }

@@ -2,14 +2,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { useAlert } from '@/hook/useAlert'
 import HomeView from '../views/HomeView.vue'
-import GradeView from '../views/GradeCalculator.vue'
-import SignInView from '../views/auth/SignInView.vue'
-import SignUpView from '../views/auth/SignUpView.vue'
-import ShopView from '../views/shop/ShopView.vue'
-import AddProductView from '../views/shop/AddProductView.vue'
-import ProductDetailView from '../views/shop/ProductDetailView.vue'
-import CartView from '../views/shop/CartView.vue'
-import EditProductView from '../views/shop/EditProductView.vue'
 
 Vue.use(VueRouter)
 
@@ -22,53 +14,59 @@ const routes = [
   {
     path: '/grade',
     name: 'grade',
-    component: GradeView,
+    component: () => import(/* webpackChunkName: "grade" */ '../views/GradeCalculator.vue'),
   },
   {
     path: '/signin',
     name: 'signin',
-    component: SignInView,
+    component: () => import(/* webpackChunkName: "auth" */ '../views/auth/SignInView.vue'),
   },
   {
     path: '/signup',
     name: 'signup',
-    component: SignUpView,
+    component: () => import(/* webpackChunkName: "auth" */ '../views/auth/SignUpView.vue'),
   },
   {
     path: '/shop',
     name: 'shop',
-    component: ShopView
+    component: () => import(/* webpackChunkName: "shop" */ '../views/shop/ShopView.vue'),
   },
   {
     path: '/add_product',
     name: 'add-product',
-    component: AddProductView
+    component: () => import(/* webpackChunkName: "shop-admin" */ '../views/shop/AddProductView.vue'),
   },
   {
     path: '/shop/:id',
     name: 'product-detail',
-    component: ProductDetailView,
-    props: true
+    component: () => import(/* webpackChunkName: "shop-detail" */ '../views/shop/ProductDetailView.vue'),
+    props: true,
   },
   {
     path: '/cart',
     name: 'cart',
-    component: CartView
+    component: () => import(/* webpackChunkName: "cart" */ '../views/shop/CartView.vue'),
   },
   {
     path: '/edit_product/:id',
     name: 'edit_product',
-    component: EditProductView,
-    props: true
-  }
+    component: () => import(/* webpackChunkName: "shop-admin" */ '../views/shop/EditProductView.vue'),
+    props: true,
+  },
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes,
-  scrollBehavior(savedPosition) {
-    return savedPosition || { x: 0, y: 0 }
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    }
+    if (to.hash) {
+      return { selector: to.hash, offset: { x: 0, y: 76 } }
+    }
+    return { x: 0, y: 0 }
   },
 })
 

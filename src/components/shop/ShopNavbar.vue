@@ -1,10 +1,24 @@
 <template>
   <header class="shop-nav">
-    <a href="#" class="shop-nav__brand">
-      <img src="../../assets/images/logo.png" alt="" class="shop-nav__logo" />
-    </a>
+    <div class="shop-nav__brand-group">
+      <router-link to="/shop" class="shop-nav__brand">
+        <img src="../../assets/images/logo.png" alt="Pokémon Vault" class="shop-nav__logo" />
+      </router-link>
+    </div>
 
     <div class="shop-nav__actions">
+      <!-- <router-link
+        v-if="isAdmin"
+        to="/approve_users"
+        class="shop-nav__admin"
+        aria-label="Approve Users"
+        title="จัดการอนุมัติสมาชิก"
+      >
+        <v-icon size="19">mdi-account-check-outline</v-icon>
+        <span class="shop-nav__admin-text">Approve Users</span>
+        <span v-if="pendingCount" class="shop-nav__admin-badge">{{ pendingCount }}</span>
+      </router-link> -->
+
       <router-link to="/cart" class="shop-nav__btn" :aria-label="`Shopping cart (${cartCount} items)`">
         <v-icon>mdi-cart-outline</v-icon>
         <span v-if="cartCount" class="shop-nav__badge">{{ cartCount }}</span>
@@ -30,7 +44,7 @@
             title="Sign out"
             @click="handleLogout"
           >
-          <v-icon size="18">mdi-logout</v-icon>
+            <v-icon size="18">mdi-logout</v-icon>
           </button>
         </div>
       </template>
@@ -52,6 +66,7 @@ import { computed } from 'vue'
 import router from '@/router'
 import { useAuth } from '@/hook/useAuth'
 import { useSignOut } from '@/hook/useSignOut'
+// import { useUsers } from '@/hook/useUsers'
 
 export default {
   name: 'ShopNavbar',
@@ -60,11 +75,21 @@ export default {
   },
   setup() {
     const { user, isAuthenticated } = useAuth()
+    // const { pendingCount, ensureLoaded } = useUsers()
     const { confirmSignOut } = useSignOut(() => {
       if (router.currentRoute.name === 'product-detail') {
         router.push('/shop').catch(() => {})
       }
     })
+
+    // watch(
+    //   () => [isAuthenticated.value, isAdmin.value],
+    //   ([authed, admin]) => {
+    //     if (authed && admin) ensureLoaded()
+    //   },
+    //   { immediate: true }
+    // )
+
     const username = computed(() => (user.value && user.value.username) || 'Member')
     const signInRoute = computed(() => {
       const fullPath = router.currentRoute.fullPath
@@ -75,6 +100,8 @@ export default {
 
     return {
       isAuthenticated,
+      // isAdmin,
+      // pendingCount,
       username,
       signInRoute,
       handleLogout: confirmSignOut,

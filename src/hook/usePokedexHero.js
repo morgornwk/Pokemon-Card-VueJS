@@ -79,6 +79,7 @@ export function usePokedexHero(stageRef) {
 
   let rafId = 0
   let observer = null
+  let io = null
   let mounted = false
 
   onMounted(async () => {
@@ -172,15 +173,33 @@ export function usePokedexHero(stageRef) {
     updateFeatured()
 
     let last = performance.now()
-    const tick = (now) => {
-      const dt = Math.min(0.05, (now - last) / 1000)
-      last = now
+    let isIntersecting = true
 
-      for (const row of rows) {
-        if (!reducedMotion) row.offset += row.dir * SCROLL_SPEED * dt
-        positionRow(row, metrics)
+    if (typeof IntersectionObserver !== 'undefined') {
+      io = new IntersectionObserver(
+        ([entry]) => {
+          isIntersecting = entry.isIntersecting
+          if (isIntersecting) last = performance.now()
+        },
+        { threshold: 0 }
+      )
+      io.observe(stage)
+    }
+
+    const tick = (now) => {
+      if (!mounted) return
+      if (isIntersecting) {
+        const dt = Math.min(0.05, (now - last) / 1000)
+        last = now
+
+        for (const row of rows) {
+          if (!reducedMotion) row.offset += row.dir * SCROLL_SPEED * dt
+          positionRow(row, metrics)
+        }
+        updateFeatured()
+      } else {
+        last = now
       }
-      updateFeatured()
       rafId = requestAnimationFrame(tick)
     }
 
@@ -199,6 +218,7 @@ export function usePokedexHero(stageRef) {
     mounted = false
     if (rafId) cancelAnimationFrame(rafId)
     if (observer) observer.disconnect()
+    if (io) io.disconnect()
   })
 
   return {

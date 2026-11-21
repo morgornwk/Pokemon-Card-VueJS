@@ -1,39 +1,530 @@
-.grade-wrap {
-  min-height: calc(100vh - 72px);
+/* ==========================================================================
+   GRADE CALCULATOR - MODERN EDITORIAL UI
+   Polished aesthetics, interactive feedback, responsive layout
+   ========================================================================== */
+
+.grade-page {
+  min-height: 100vh;
+  background-color: #f8faf9;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #202522;
+  position: relative;
+  overflow-x: hidden;
+  padding-bottom: 60px;
+}
+
+/* ==========================================================================
+   Top Navigation
+   ========================================================================== */
+
+.grade-nav {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 16px;
-  background: #f9fafb;
+  justify-content: space-between;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 24px;
+}
+
+.grade-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #3b463f;
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  border: 1px solid #dce4dd;
+  box-shadow: 0 1px 3px rgba(32, 37, 34, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.grade-back:hover {
+  background: #202522;
+  border-color: #202522;
+  color: #ffffff;
+  transform: translateX(-2px);
+  box-shadow: 0 4px 12px rgba(32, 37, 34, 0.15);
+}
+
+.grade-back .v-icon {
+  color: inherit;
+}
+
+.grade-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(223, 232, 226, 0.6);
+  border: 1px solid rgba(206, 219, 210, 0.8);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #52685a;
+}
+
+/* ==========================================================================
+   Container & Ambient Background Orbs
+   ========================================================================== */
+
+.grade-container {
+  position: relative;
+  max-width: 720px;
+  margin: 20px auto 0;
+  padding: 0 20px;
+}
+
+.grade-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+  z-index: 0;
+}
+
+.grade-orb--1 {
+  top: -40px;
+  left: -80px;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(223, 232, 226, 0.7) 0%, rgba(223, 232, 226, 0) 70%);
+}
+
+.grade-orb--2 {
+  bottom: -40px;
+  right: -60px;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(241, 229, 220, 0.7) 0%, rgba(241, 229, 220, 0) 70%);
+}
+
+/* ==========================================================================
+   Main Card
+   ========================================================================== */
+
+.grade-card-wrapper {
+  position: relative;
+  z-index: 1;
 }
 
 .grade-card {
-  width: 100%;
-  max-width: 420px;
-  padding: 24px;
-  border-radius: 16px !important;
+  background: #ffffff;
+  border: 1px solid #e2e8e3;
+  border-radius: 28px;
+  padding: 38px 36px;
+  box-shadow: 0 20px 45px -10px rgba(32, 37, 34, 0.06), 0 1px 3px rgba(32, 37, 34, 0.03);
 }
 
-.grade-head {
+/* Card Header */
+.grade-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  margin-bottom: 28px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid #edf1ee;
+}
+
+.grade-icon-box {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #e4ede6 0%, #d8e4db 100%);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 12px rgba(45, 90, 63, 0.12);
+  flex-shrink: 0;
+}
+
+.grade-kicker {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #71877c;
+  margin-bottom: 4px;
+}
+
+.grade-title {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #202522;
+  line-height: 1.2;
+}
+
+.grade-sub {
+  margin: 6px 0 0;
+  font-size: 13.5px;
+  color: #6c7870;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Quick Presets
+   ========================================================================== */
+
+.grade-presets {
+  margin-bottom: 22px;
+  padding: 12px 16px;
+  background: #f7faf8;
+  border-radius: 14px;
+  border: 1px solid #e6ece7;
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.grade-result {
-  margin-top: 20px;
-  padding: 14px;
+.grade-presets__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #718076;
+}
+
+.grade-presets__list {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.grade-preset-btn {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #d8e2d9;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #3b463f;
+  cursor: pointer;
+  transition: all 0.16s ease;
+}
+
+.grade-preset-btn:hover {
+  background: #2d5a3f;
+  border-color: #2d5a3f;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Form Input & Actions
+   ========================================================================== */
+
+.grade-form {
+  margin-bottom: 24px;
+}
+
+.grade-input-group {
+  margin-bottom: 8px;
+}
+
+.grade-input-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #2c3830;
+  margin-bottom: 8px;
+}
+
+.grade-field ::v-deep .v-input__control .v-input__slot {
+  background: #fcfdfc !important;
+  border-radius: 14px !important;
+  min-height: 50px !important;
+  border: 1px solid #dce4dd;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.grade-field ::v-deep .v-input__control .v-input__slot:hover {
+  border-color: #71877c;
+}
+
+.grade-field ::v-deep .v-input__control .v-input__slot input {
+  font-size: 16px;
+  font-weight: 600;
+  color: #202522;
+}
+
+.grade-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.grade-btn-submit {
+  height: 50px !important;
+  border-radius: 14px !important;
+  background: linear-gradient(135deg, #2d5a3f 0%, #1f422e 100%) !important;
+  color: #ffffff !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: none !important;
+  box-shadow: 0 8px 20px -4px rgba(45, 90, 63, 0.35) !important;
+  transition: all 0.2s ease !important;
+}
+
+.grade-btn-submit:hover {
+  box-shadow: 0 12px 26px -4px rgba(45, 90, 63, 0.45) !important;
+  transform: translateY(-1px);
+}
+
+.grade-btn-reset {
+  color: #718076 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+}
+
+.grade-btn-reset:hover {
+  color: #dc2626 !important;
+}
+
+/* ==========================================================================
+   Result Card Showcase
+   ========================================================================== */
+
+.grade-result-card {
+  margin-top: 24px;
+  margin-bottom: 28px;
+  padding: 24px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  box-shadow: 0 10px 25px -5px rgba(32, 37, 34, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.grade-result-top {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 16px;
+}
+
+.grade-badge-circle {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  color: #ffffff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  flex-shrink: 0;
+}
+
+.grade-badge-letter {
+  font-family: 'Manrope', sans-serif;
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.grade-result-info {
+  flex: 1;
+}
+
+.grade-result-status {
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.grade-result-score {
+  font-size: 13.5px;
+  color: #4a574f;
+}
+
+.grade-result-score strong {
+  font-size: 16px;
+  color: #202522;
+}
+
+/* Progress Bar */
+.grade-progress-wrap {
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+
+.grade-progress-bar {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.07);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.grade-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.grade-cutoff-mark {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(255, 255, 255, 0.7);
+  transform: translateX(-50%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.grade-progress-scale {
+  position: relative;
+  width: 100%;
+  height: 18px;
+  margin-top: 6px;
+}
+
+.grade-scale-val {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 600;
+  color: #88968d;
+  line-height: 1;
+  user-select: none;
+}
+
+.grade-scale-val--0 {
+  left: 0 !important;
+  transform: none !important;
+}
+
+.grade-scale-val--100 {
+  left: 100% !important;
+  transform: translateX(-100%) !important;
+}
+
+.grade-result-message {
+  margin: 12px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  font-size: 13px;
+  color: #3b463f;
+  line-height: 1.5;
+}
+
+/* ==========================================================================
+   Criteria Reference Scale
+   ========================================================================== */
+
+.grade-criteria {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid #edf1ee;
+}
+
+.grade-criteria__title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #5a665e;
+  margin-bottom: 14px;
+}
+
+.grade-criteria__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 10px;
+}
+
+.grade-criteria__item {
+  padding: 12px 10px;
+  background: #fbfdfb;
+  border: 1px solid #e6ece7;
+  border-radius: 14px;
   text-align: center;
-  font-size: 1.25rem;
-  border-radius: 8px;
+  transition: all 0.22s ease;
 }
 
-.grade-result strong {
-  font-size: 1.5rem;
+.grade-criteria__item.is-active {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
-.grade--a { background: #ecfdf5; color: #047857; }
-.grade--b { background: #eff6ff; color: #1d4ed8; }
-.grade--c { background: #f0fdf4; color: #15803d; }
-.grade--d { background: #fff7ed; color: #c2410c; }
-.grade--f { background: #fef2f2; color: #b91c1c; }
+.grade-criteria__badge {
+  font-family: 'Manrope', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.grade-criteria__range {
+  font-size: 11px;
+  font-weight: 700;
+  color: #333d36;
+  margin-top: 3px;
+}
+
+.grade-criteria__label {
+  font-size: 9.5px;
+  color: #718076;
+  margin-top: 2px;
+}
+
+/* ==========================================================================
+   Animations
+   ========================================================================== */
+
+.grade-pop-enter-active {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.grade-pop-leave-active {
+  transition: all 0.2s ease;
+}
+
+.grade-pop-enter {
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+}
+
+.grade-pop-leave-to {
+  opacity: 0;
+  transform: translateY(-8px) scale(0.98);
+}
+
+/* ==========================================================================
+   Responsive Breakpoints
+   ========================================================================== */
+
+@media (max-width: 600px) {
+  .grade-card {
+    padding: 26px 20px;
+    border-radius: 22px;
+  }
+
+  .grade-header {
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .grade-title {
+    font-size: 22px;
+  }
+
+  .grade-criteria__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

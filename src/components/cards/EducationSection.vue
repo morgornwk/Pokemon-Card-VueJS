@@ -1,42 +1,96 @@
+
 <template>
-  <section id="edu" class="edu-section">
+  <section id="edu" class="edu-section reveal-section">
     <div class="edu-container">
-      <div class="edu-layout">
-        <div class="edu-header">
-          <h2 class="edu-title">Education</h2>
-          <p class="edu-sub">ประวัติและวุฒิการศึกษา</p>
+
+      <div class="edu-header reveal-item">
+        <span class="edu-label">02 / BACKGROUND</span>
+        <h2 class="edu-title">Education<span>.</span></h2>
+        <p class="edu-sub">The foundation of my journey.</p>
+      </div>
+
+      <div class="edu-card reveal-item">
+
+        <div class="edu-image-wrap">
+          <img
+            :src="universityImage"
+            :alt="education.university || 'University campus'"
+            class="edu-image"
+            loading="lazy"
+          />
+
+          <div class="edu-image-overlay">
+            <span>UNIVERSITY LIFE</span>
+            <span class="edu-image-number">01</span>
+          </div>
         </div>
 
-        <div class="edu-card">
+        <div class="edu-details">
+
           <div class="edu-icon-wrap">
-            <v-icon size="26" color="#f97316">mdi-school-outline</v-icon>
+            <v-icon size="24" color="#71816d">
+              mdi-school-outline
+            </v-icon>
           </div>
 
-          <div class="edu-details">
-            <div class="edu-top">
-              <div>
-                <h3 class="edu-uni">{{ education.university }}</h3>
-                <p class="edu-major">
-                  {{ education.major }}
-                  <span class="edu-sep">·</span>
-                  <span class="edu-campus">{{ education.campus }}</span>
-                </p>
-              </div>
-              <span class="edu-year">{{ education.graduatedYear }}</span>
+          <span class="edu-eyebrow">MY EDUCATION</span>
+
+          <h3 class="edu-uni">
+            {{ education.university }}
+          </h3>
+
+          <p class="edu-major">
+            {{ education.major }}
+          </p>
+
+          <p class="edu-campus">
+            <v-icon small color="#84917f">
+              mdi-map-marker-outline
+            </v-icon>
+            {{ education.campus }}
+          </p>
+
+          <div class="edu-divider"></div>
+
+          <div class="edu-bottom">
+            <div>
+              <span class="edu-meta-label">ACADEMIC YEAR</span>
+              <p class="edu-year">
+                {{ education.graduatedYear }}
+              </p>
             </div>
+
+            <span class="edu-status">
+              <span class="edu-status-dot"></span>
+              Education
+            </span>
           </div>
+
         </div>
       </div>
+
     </div>
   </section>
 </template>
 
 <script>
+import universityImage from '@/assets/images/university.jpeg'
+
 export default {
   name: 'EducationSection',
+
   props: {
-    education: { type: Object, default: () => ({}) },
+    education: {
+      type: Object,
+      default: () => ({})
+    }
   },
+
+  data() {
+    return {
+      universityImage
+    }
+  }
 }
 </script>
 
